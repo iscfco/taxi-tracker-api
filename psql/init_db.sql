@@ -111,9 +111,6 @@ $$
 DECLARE
     counter INT2;
 BEGIN    
-    -- ***** *************************************************************
-    -- ***** Validations: User Errors - httpStatusOk: 200            *****
-    -- ***** *************************************************************
     -- If the email is not null, validate that not exist
     IF p_email IS NOT NULL THEN
         SELECT COUNT(*) INTO counter FROM customer WHERE email = p_email;
@@ -129,6 +126,49 @@ BEGIN
     RETURN 0;   
 END    
 $$ LANGUAGE plpgsql;
+
+/* -----------------------------------------------------------------------------------------
+ * Result Codes:
+ * Succes codes - httpStatusOk: 200
+ * 0 = OK
+ 
+ * User Errors - httpStatusOk: 200
+ * -1 = EUS001 - Email already exists 
+*/
+DROP FUNCTION IF EXISTS driver_insert(VARCHAR, VARCHAR, VARCHAR, VARCHAR, TEXT);
+
+CREATE OR REPLACE FUNCTION driver_insert(
+        p_id 			VARCHAR(36),
+        p_first_name 	VARCHAR(50),
+        p_last_name 	VARCHAR(50),
+        p_email 		VARCHAR(320),
+        p_password		TEXT
+)
+RETURNS INT AS
+$$
+DECLARE
+    counter INT2;
+BEGIN    
+    -- If the email is not null, validate that not exist
+    IF p_email IS NOT NULL THEN
+        SELECT COUNT(*) INTO counter FROM driver WHERE email = p_email;
+        IF counter <> 0 THEN
+            Return -1;
+        END IF;
+    END IF;
+
+    INSERT INTO driver
+        ( id,  first_name,   last_name,   email,   password)
+    VALUES
+        (p_id, p_first_name, p_last_name, p_email, p_password); 
+    RETURN 0;   
+END    
+$$ LANGUAGE plpgsql;
+
+
+
+
+
 
 
 

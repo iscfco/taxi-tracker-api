@@ -6,12 +6,12 @@ import (
 	"gbmchallenge/api/model"
 )
 
-type CustomerDao struct {
+type DriverDao struct {
 }
 
-var qCustomerInsert = `SELECT * FROM customer_insert($1, $2, $3, $4, $5)`
+var qDriverInsert = `SELECT * FROM driver_insert($1, $2, $3, $4, $5)`
 
-func (CustomerDao) CreateAccount(c *model.Customer) (res model.Result, err error) {
+func (DriverDao) CreateAccount(d *model.Driver) (res model.Result, err error) {
 	db, err := dbconn.GetPsqlDBConn()
 	if err != nil {
 		return res, err
@@ -19,7 +19,7 @@ func (CustomerDao) CreateAccount(c *model.Customer) (res model.Result, err error
 	defer db.Close()
 
 	var resCode int8
-	err = db.QueryRow(qCustomerInsert, c.Id, c.FirstName, c.LastName, c.Email, c.Password).Scan(&resCode)
+	err = db.QueryRow(qDriverInsert, d.Id, d.FirstName, d.LastName, d.Email, d.Password).Scan(&resCode)
 	if err != nil {
 		return res, err
 	}
