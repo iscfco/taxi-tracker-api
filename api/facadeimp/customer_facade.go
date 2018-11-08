@@ -1,13 +1,13 @@
 package facadeimp
 
 import (
+	"gbmchallenge/api/constants"
 	"gbmchallenge/api/daoi"
+	"gbmchallenge/api/errorhandler"
 	"gbmchallenge/api/facadei"
 	"gbmchallenge/api/model"
 	"gbmchallenge/api/security"
-	"gbmchallenge/api/util"
 	"github.com/satori/go.uuid"
-	"log"
 )
 
 type customerFacade struct {
@@ -21,11 +21,17 @@ func NewCustomerFacade(c daoi.CustomerDaoI) facadei.CustomerFacadeI {
 }
 
 func (c *customerFacade) CreateAccount(customer *model.Customer) model.Result {
+	if len(customer.Password) < 8 {
+		return model.Result{
+			ResCode:  constants.EDV001_C,
+			Msg:      constants.EDV001_M,
+			HttpCode: 200,
+		}
+	}
+
 	pwdHashed, err := security.HashPassword(customer.Password)
 	if err != nil {
-		// handle
-		log.Print(err)
-		return util.GetServerErr()
+		return errorhandler.HandleErr(&err)
 	}
 
 	customerId, _ := uuid.NewV4()
@@ -33,9 +39,7 @@ func (c *customerFacade) CreateAccount(customer *model.Customer) model.Result {
 	customer.Password = pwdHashed
 	res, err := c.customerDao.CreateAccount(customer)
 	if err != nil {
-		// handle
-		log.Print(err)
-		return util.GetServerErr()
+		return errorhandler.HandleErr(&err)
 	}
 	return res
 }

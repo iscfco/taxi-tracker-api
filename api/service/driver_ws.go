@@ -15,7 +15,6 @@ type driverWS struct {
 
 func NewDriverWS() driverWS {
 	dao := psql.DriverDao{}
-
 	return driverWS{
 		driverFacade: facadeimp.NewDriverFacade(dao),
 	}
@@ -32,6 +31,6 @@ func (ws *driverWS) CreateAccountHandler(w http.ResponseWriter, r *http.Request)
 	}
 	res := ws.driverFacade.CreateAccount(&driver)
 	payload, _ := json.Marshal(res)
-	w.WriteHeader(res.HttpStatusCode)
+	w.WriteHeader(res.HttpCode)
 	w.Write(payload)
 }

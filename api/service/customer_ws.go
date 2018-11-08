@@ -24,6 +24,7 @@ func NewCustomerWS() customerWS {
 func (ws *customerWS) CreateAccountHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	customer := model.Customer{}
+
 	err := json.NewDecoder(r.Body).Decode(&customer)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
@@ -32,6 +33,6 @@ func (ws *customerWS) CreateAccountHandler(w http.ResponseWriter, r *http.Reques
 	}
 	res := ws.customerFacade.CreateAccount(&customer)
 	payload, _ := json.Marshal(res)
-	w.WriteHeader(res.HttpStatusCode)
+	w.WriteHeader(res.HttpCode)
 	w.Write(payload)
 }

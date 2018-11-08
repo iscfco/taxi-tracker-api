@@ -26,9 +26,9 @@ func (DriverDao) CreateAccount(d *model.Driver) (res model.Result, err error) {
 
 	switch resCode {
 	case 0:
-		res.ResultCode, res.Message, res.HttpStatusCode = constants.SUCCESS_C, constants.SUCCESS_M, 200
+		res.ResCode, res.Msg, res.HttpCode = constants.SUCCESS_C, constants.SUCCESS_M, 200
 	case -1:
-		res.ResultCode, res.Message, res.HttpStatusCode = constants.EUS001_C, constants.EUS001_M, 200
+		res.ResCode, res.Msg, res.HttpCode = constants.EUS001_C, constants.EUS001_M, 200
 	}
 
 	return res, nil

@@ -19,7 +19,6 @@ func main() {
 		WriteTimeout:   10 * time.Second,
 		MaxHeaderBytes: 1 << 20,
 	}
-
 	fmt.Println("Listening on port 5000")
 	server.ListenAndServe()
 }

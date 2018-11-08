@@ -11,14 +11,16 @@ func VehicleRoutes() []Route {
 			Handler: ws.GetVehiclesHandler,
 		},
 		{
-			Method:  "GET",
-			Path:    "/api/vehicle/{vehicleId}/position",
-			Handler: ws.GetVehiclePositionHandler,
+			Method:    "GET",
+			Path:      "/api/vehicle/{vehicleId}/position",
+			Handler:   ws.GetVehiclePositionHandler,
+			Protected: true,
 		},
 		{
-			Method:  "PATCH",
-			Path:    "/api/vehicle/{vehicleId}/position",
-			Handler: ws.UpdateVehiclePositionHandler,
+			Method:    "PATCH",
+			Path:      "/api/vehicle/{vehicleId}/position",
+			Handler:   ws.UpdateVehiclePositionHandler,
+			Protected: true,
 		},
 	}
 

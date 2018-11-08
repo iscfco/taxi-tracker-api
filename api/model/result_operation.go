@@ -1,7 +1,7 @@
 package model
 
 type Result struct {
-	ResultCode     string `json:"result_code"`
-	Message        string `json:"message"`
-	HttpStatusCode int    `json:"-"`
+	ResCode  string `json:"result_code"`
+	Msg      string `json:"message"`
+	HttpCode int    `json:"-"`
 }

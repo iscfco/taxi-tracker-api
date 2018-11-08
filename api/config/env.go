@@ -1,10 +1,11 @@
 package config
 
 const (
-	Pro = 1
-	Loc = 2
+	Production = 1
+	Local      = 2
 )
 
 const (
-	DbConnEnv = Loc
+	DbConnEnv = Local
+	ApiEnv    = Local
 )

@@ -11,7 +11,7 @@ import (
 func GetPsqlDBConn() (*sql.DB, error) {
 	driverName := "postgres"
 	format := "user=%s password=%s host=%s dbname=%s sslmode=disable"
-	dbConnConfig := GetPsqlDbConfig()
+	dbConnConfig := getPsqlDbConfig()
 	dataSourceName := fmt.Sprintf(
 		format,
 		dbConnConfig.User,
@@ -19,24 +19,22 @@ func GetPsqlDBConn() (*sql.DB, error) {
 		dbConnConfig.Server,
 		dbConnConfig.DbName,
 	)
-	fmt.Println("CurrentUser:", os.Getenv("USER"))
-	fmt.Println(dataSourceName)
 	return getDBConnection(&driverName, &dataSourceName)
 }
 
-func GetPsqlDbConfig() ServerConfig {
+func getPsqlDbConfig() ServerConfig {
 	switch config.DbConnEnv {
-	case config.Pro:
+	case config.Production:
 		return ServerConfig{
 			Server:   os.Getenv("PSQL_HOST"),
-			DbName:     os.Getenv("PSQL_DBNAME"),
+			DbName:   os.Getenv("PSQL_DBNAME"),
 			User:     os.Getenv("PSQL_USER"),
 			Password: os.Getenv("PSQL_PWD"),
 		}
-	case config.Loc:
+	case config.Local:
 		return ServerConfig{
 			Server:   "localhost",
-			DbName:     "taxi_traker",
+			DbName:   "taxi_traker",
 			User:     "postgres",
 			Password: "12345Ab...",
 		}

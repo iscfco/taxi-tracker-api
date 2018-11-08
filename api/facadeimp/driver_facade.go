@@ -2,12 +2,11 @@ package facadeimp
 
 import (
 	"gbmchallenge/api/daoi"
+	"gbmchallenge/api/errorhandler"
 	"gbmchallenge/api/facadei"
 	"gbmchallenge/api/model"
 	"gbmchallenge/api/security"
-	"gbmchallenge/api/util"
 	"github.com/satori/go.uuid"
-	"log"
 )
 
 type driverFacade struct {
@@ -23,9 +22,7 @@ func NewDriverFacade(d daoi.DriverDaoI) facadei.DriverFacadeI {
 func (c *driverFacade) CreateAccount(driver *model.Driver) model.Result {
 	pwdHashed, err := security.HashPassword(driver.Password)
 	if err != nil {
-		// handle
-		log.Print(err)
-		return util.GetServerErr()
+		return errorhandler.HandleErr(&err)
 	}
 
 	driverId, _ := uuid.NewV4()
@@ -33,9 +30,7 @@ func (c *driverFacade) CreateAccount(driver *model.Driver) model.Result {
 	driver.Password = pwdHashed
 	res, err := c.dao.CreateAccount(driver)
 	if err != nil {
-		// handle
-		log.Print(err)
-		return util.GetServerErr()
+		return errorhandler.HandleErr(&err)
 	}
 	return res
 }
