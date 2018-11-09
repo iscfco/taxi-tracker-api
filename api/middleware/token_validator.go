@@ -7,6 +7,7 @@ import (
 	"gbmchallenge/api/security/jwttasks"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/dgrijalva/jwt-go/request"
+	"github.com/gorilla/context"
 	"net/http"
 )
 
@@ -28,6 +29,10 @@ func ValidateToken(rw http.ResponseWriter, req *http.Request, next http.HandlerF
 			return authBackend.PublicKey, nil
 		}
 	})
+
+	userId := token.Claims.(jwt.MapClaims)["sub"]
+	context.Set(req, "userId", userId)
+
 	if err != nil || !token.Valid {
 		rw.WriteHeader(http.StatusForbidden)
 		return
