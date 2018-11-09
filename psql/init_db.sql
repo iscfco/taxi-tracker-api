@@ -20,10 +20,18 @@ CREATE TABLE vehicle(
 	make		VARCHAR(50) NOT NULL,
 	model		VARCHAR(50) NOT NULL,
 	"year"		INT2		NOT NULL,
-	latitude	FLOAT		NOT NULL,
-	longitude	FLOAT		NOT NULL,
-	CONSTRAINT pk_vehicle PRIMARY KEY (id)
+	latitude	FLOAT		NOT NULL DEFAULT 0,
+	longitude	FLOAT		NOT NULL DEFAULT 0,
+	CONSTRAINT pk_vehicle2 PRIMARY KEY (id)
 );
+
+-- Insert default vehicles
+INSERT INTO vehicle
+	(id, make, 			model, "year")
+VALUES
+	('B-83-570', 'Volkswagen', 'Golf',  '2012' ),
+	('X-03-024', 'Volkswagen', 'Jetta', '2016' ),
+	('B-52-069', 'Volkswagen', 'Polo',  '2014' );
 
 CREATE TABLE driver(
 	id 			VARCHAR(36) NOT NULL,
@@ -169,9 +177,66 @@ END
 $$ LANGUAGE plpgsql;
 
 
+/* -----------------------------------------------------------------------------------------
+ * *****************************************************************************************
+	new function
+*/
+DROP FUNCTION IF EXISTS taxi_service_insert(VARCHAR);
+
+CREATE OR REPLACE FUNCTION taxi_service_insert(
+        p_customer_id VARCHAR(36)
+)
+RETURNS VARCHAR AS
+$$
+DECLARE
+    counter INT2;
+BEGIN    
+    SELECT COUNT(*) INTO counter 
+    FROM taxi_service
+    WHERE customer_id = p_customer_id;
+
+	IF counter <> 0 THEN
+		RETURN p_customer_id;
+	END IF;
+	
+	INSERT INTO taxi_service (customer_id, vehicle_id, driver_id)
+		SELECT p_customer_id, vehicle_id, driver_id 
+		FROM vehicle_driver LIMIT 1
+	RETURNING customer_id INTO p_customer_id;
+	RETURN p_customer_id;
+END    
+$$ LANGUAGE plpgsql;
 
 
+/* -----------------------------------------------------------------------------------------
+ * *****************************************************************************************
+	new function
+*/
+DROP FUNCTION IF EXISTS vehicle_driver_insert(VARCHAR, VARCHAR);
 
+CREATE OR REPLACE FUNCTION vehicle_driver_insert(
+        p_vehicle_id VARCHAR(8),
+        p_driver_id	 VARCHAR(36)
+)
+RETURNS INT AS
+$$
+DECLARE
+    counter INT2;
+BEGIN    
+    SELECT COUNT(*) INTO counter
+    FROM vehicle_driver
+    WHERE vehicle_id = p_vehicle_id
+    	AND driver_id = p_driver_id;
+	
+	IF counter = 0 THEN
+		INSERT INTO vehicle_driver
+			(vehicle_id,   driver_id	)
+		VALUES
+			(p_vehicle_id, p_driver_id	);
+	END IF;
+	RETURN 0;
+END    
+$$ LANGUAGE plpgsql;
 
 
 

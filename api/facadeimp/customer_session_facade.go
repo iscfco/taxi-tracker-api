@@ -6,6 +6,7 @@ import (
 	"gbmchallenge/api/errorhandler"
 	"gbmchallenge/api/facadei"
 	"gbmchallenge/api/model"
+	"gbmchallenge/api/response/prebuilt"
 	"gbmchallenge/api/security"
 	"gbmchallenge/api/security/jwttasks"
 )
@@ -55,6 +56,6 @@ func (c *customerSessionFacade) Authorize(user *model.User) (s model.CustomerSes
 	}
 
 	s.FirstName, s.LastName = customer.FirstName, customer.LastName
-	s.Res.ResCode, s.Res.Msg, s.Res.HttpCode = constants.SUCCESS_C, constants.SUCCESS_M, 200
+	s.Res = prebuilt.GetSuccess()
 	return
 }

@@ -15,6 +15,7 @@ func CreateRoutes(router *mux.Router) {
 	routes = append(routes, r.CustomerSessionRoutes()...)
 	routes = append(routes, r.DriverSessionRoutes()...)
 	routes = append(routes, r.TaxiServiceRoutes()...)
+	routes = append(routes, r.VehicleDriverRoutes()...)
 
 	for _, route := range routes {
 		if route.Protected {

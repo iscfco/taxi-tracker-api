@@ -5,10 +5,7 @@ import "gbmchallenge/api/dbconn"
 type TaxiServiceDao struct {
 }
 
-var qCreateService = `
-	INSERT INTO taxi_service (customer_id, vehicle_id, driver_id)
-		SELECT $1, vehicle_id, driver_id FROM vehicle_driver LIMIT 1
-	RETURNING vehicle_id`
+var qCreateService = `SELECT taxi_service_insert($1)`
 
 func (TaxiServiceDao) CreateService(customerId *string) (string, error) {
 	var resCode string
@@ -30,7 +27,7 @@ func (TaxiServiceDao) CreateService(customerId *string) (string, error) {
 	}
 
 	for rows.Next() {
-		err = rows.Scan(resCode)
+		err = rows.Scan(&resCode)
 		if err != nil {
 			return resCode, err
 		}

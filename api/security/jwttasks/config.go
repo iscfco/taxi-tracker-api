@@ -7,8 +7,8 @@ import (
 
 const (
 	// Values are in minutes
-	accessTokenDuration  = 5
-	refreshTokenDuration = (10 * 1) * 1 // = (mins * hours) * days
+	accessTokenDuration  = 30
+	refreshTokenDuration = (60 * 1) * 1 // = (mins * hours) * days
 )
 
 func getJwtPrivateKeyPath() string {

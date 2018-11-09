@@ -30,12 +30,11 @@ func ValidateToken(rw http.ResponseWriter, req *http.Request, next http.HandlerF
 		}
 	})
 
-	userId := token.Claims.(jwt.MapClaims)["sub"]
-	context.Set(req, "userId", userId)
-
 	if err != nil || !token.Valid {
 		rw.WriteHeader(http.StatusForbidden)
 		return
 	}
+	userId := token.Claims.(jwt.MapClaims)["sub"]
+	context.Set(req, "userId", userId)
 	next(rw, req)
 }
