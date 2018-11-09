@@ -73,13 +73,14 @@ CREATE TABLE vehicle_position_history(
 CREATE TABLE taxi_service(
 	customer_id VARCHAR(36) NOT NULL,
 	vehicle_id 	VARCHAR(8)  NOT NULL,
+	driver_id	VARCHAR(36)	NOT NULL,
 	CONSTRAINT pk_taxi_service PRIMARY KEY(customer_id, vehicle_id),
 	CONSTRAINT fk_customer_taxiservice_id FOREIGN KEY(customer_id)
 		REFERENCES customer(id)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE,
-	CONSTRAINT fk_vehicle_taxiservice_id FOREIGN KEY(vehicle_id)
-		REFERENCES vehicle(id)
+	CONSTRAINT fk_vehicledriver_taxiservice_id FOREIGN KEY(vehicle_id, driver_id)
+		REFERENCES vehicle_driver(vehicle_id, driver_id)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE
 );

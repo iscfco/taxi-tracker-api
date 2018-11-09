@@ -8,6 +8,9 @@ func HashPassword(pwd string) (string, error) {
 }
 
 func CheckPasswordHash(passwordHashed, password *string) (error, bool) {
+	if *passwordHashed == "" {
+		return nil, false
+	}
 	err := bcrypt.CompareHashAndPassword([]byte(*passwordHashed), []byte(*password))
 	if err != nil {
 		if err == bcrypt.ErrMismatchedHashAndPassword {

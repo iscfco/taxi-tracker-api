@@ -10,24 +10,24 @@ import (
 	"gbmchallenge/api/security/jwttasks"
 )
 
-type customerSessionFacade struct {
-	customerDao daoi.CustomerDaoI
+type driverSessionFacade struct {
+	driverDao daoi.DriverDaoI
 }
 
-func NewCustomerSessionFacade(dao daoi.CustomerDaoI) facadei.CustomerSessionFacadeI {
-	return &customerSessionFacade{
-		customerDao: dao,
+func NewDriverSessionFacade(dao daoi.DriverDaoI) facadei.DriverSessionFacadeI {
+	return &driverSessionFacade{
+		driverDao: dao,
 	}
 }
 
-func (c *customerSessionFacade) Authorize(user *model.User) (s model.CustomerSession) {
-	err, customer := c.customerDao.GetByEmail(&user.User)
+func (c *driverSessionFacade) Authorize(user *model.User) (s model.DriverSession) {
+	err, driver := c.driverDao.GetByEmail(&user.User)
 	if err != nil {
 		s.Res = errorhandler.HandleErr(&err)
 		return
 	}
 
-	err, match := security.CheckPasswordHash(&customer.Password, &user.Password)
+	err, match := security.CheckPasswordHash(&driver.Password, &user.Password)
 	if err != nil {
 		s.Res = errorhandler.HandleErr(&err)
 		return
@@ -42,19 +42,19 @@ func (c *customerSessionFacade) Authorize(user *model.User) (s model.CustomerSes
 		return
 	}
 
-	s.AccessToken, err = jwtTasks.GenerateAccessToken(&customer.Id)
+	s.AccessToken, err = jwtTasks.GenerateAccessToken(&driver.Id)
 	if err != nil {
 		s.Res = errorhandler.HandleErr(&err)
 		return
 	}
 
-	s.RefreshToken, err = jwtTasks.GenerateRefreshToken(&customer.Id)
+	s.RefreshToken, err = jwtTasks.GenerateRefreshToken(&driver.Id)
 	if err != nil {
 		s.Res = errorhandler.HandleErr(&err)
 		return
 	}
 
-	s.FirstName, s.LastName = customer.FirstName, customer.LastName
+	s.FirstName, s.LastName = driver.FirstName, driver.LastName
 	s.Res.ResCode, s.Res.Msg, s.Res.HttpCode = constants.SUCCESS_C, constants.SUCCESS_M, 200
 	return
 }

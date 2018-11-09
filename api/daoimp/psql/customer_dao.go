@@ -46,10 +46,23 @@ func (CustomerDao) GetByEmail(email *string) (err error, c model.Customer){
 	}
 	defer db.Close()
 
-	err = db.QueryRow(qGetByEmail, email).Scan(&c.Id, &c.FirstName, &c.LastName, &c.Email, &c.Password)
+	stmt, err := db.Prepare(qGetByEmail)
 	if err != nil {
 		return err, c
 	}
+	defer stmt.Close()
 
+	rows, err := stmt.Query(email)
+	if err != nil {
+		return err, c
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		err = rows.Scan(&c.Id, &c.FirstName, &c.LastName, &c.Email, &c.Password)
+		if err != nil {
+			return err, c
+		}
+	}
 	return err, c
 }

@@ -3,5 +3,5 @@ package facadei
 import "gbmchallenge/api/model"
 
 type CustomerSessionFacadeI interface {
-	Authorize(user *model.User) (model.Session)
+	Authorize(user *model.User) (model.CustomerSession)
 }

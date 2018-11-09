@@ -33,3 +33,36 @@ func (DriverDao) CreateAccount(d *model.Driver) (res model.Result, err error) {
 
 	return res, nil
 }
+
+var qDriverGetByEmail = `
+	SELECT C.id, C.first_name, C.last_name, C.email, C.password 
+	FROM driver C 
+	WHERE email = $1`
+
+func (DriverDao) GetByEmail(email *string) (err error, c model.Driver) {
+	db, err := dbconn.GetPsqlDBConn()
+	if err != nil {
+		return err, c
+	}
+	defer db.Close()
+
+	stmt, err := db.Prepare(qDriverGetByEmail)
+	if err != nil {
+		return err, c
+	}
+	defer stmt.Close()
+
+	rows, err := stmt.Query(email)
+	if err != nil {
+		return err, c
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		err = rows.Scan(&c.Id, &c.FirstName, &c.LastName, &c.Email, &c.Password)
+		if err != nil {
+			return err, c
+		}
+	}
+	return err, c
+}

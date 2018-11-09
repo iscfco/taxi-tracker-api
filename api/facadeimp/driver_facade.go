@@ -1,6 +1,7 @@
 package facadeimp
 
 import (
+	"gbmchallenge/api/constants"
 	"gbmchallenge/api/daoi"
 	"gbmchallenge/api/errorhandler"
 	"gbmchallenge/api/facadei"
@@ -20,6 +21,14 @@ func NewDriverFacade(d daoi.DriverDaoI) facadei.DriverFacadeI {
 }
 
 func (c *driverFacade) CreateAccount(driver *model.Driver) model.Result {
+	if len(driver.Password) < 8 {
+		return model.Result{
+			ResCode:  constants.EDV001_C,
+			Msg:      constants.EDV001_M,
+			HttpCode: 200,
+		}
+	}
+
 	pwdHashed, err := security.HashPassword(driver.Password)
 	if err != nil {
 		return errorhandler.HandleErr(&err)

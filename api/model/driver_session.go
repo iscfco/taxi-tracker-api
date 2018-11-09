@@ -1,6 +1,6 @@
 package model
 
-type Session struct {
+type DriverSession struct {
 	Res          Result `json:"result"`
 	FirstName    string `json:"first_name,omitempty"`
 	LastName     string `json:"last_name,omitempty"`
