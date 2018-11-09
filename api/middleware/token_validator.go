@@ -3,8 +3,8 @@ package middleware
 import (
 	"encoding/json"
 	"fmt"
-	"gbmchallenge/api/errorhandler"
-	"gbmchallenge/api/security/jwttasks"
+	"taxi-tracker-api/api/errorhandler"
+	"taxi-tracker-api/api/security/jwttasks"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/dgrijalva/jwt-go/request"
 	"github.com/gorilla/context"

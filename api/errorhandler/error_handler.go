@@ -1,8 +1,8 @@
 package errorhandler
 
 import (
-	"gbmchallenge/api/model"
-	"gbmchallenge/api/response/prebuilt"
+	"taxi-tracker-api/api/model"
+	"taxi-tracker-api/api/response/prebuilt"
 	"log"
 )
 

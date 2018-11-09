@@ -1,6 +1,6 @@
 package routes
 
-import "gbmchallenge/api/service"
+import "taxi-tracker-api/api/service"
 
 func TaxiServiceRoutes() []Route {
 	ws := service.NewTaxiServiceWS()

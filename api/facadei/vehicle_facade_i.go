@@ -1,7 +1,7 @@
 package facadei
 
 import (
-	"gbmchallenge/api/model"
+	"taxi-tracker-api/api/model"
 )
 
 type VehicleFacadeI interface {

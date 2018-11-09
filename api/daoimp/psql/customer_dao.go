@@ -1,9 +1,9 @@
 package psql
 
 import (
-	"gbmchallenge/api/constants"
-	"gbmchallenge/api/dbconn"
-	"gbmchallenge/api/model"
+	"taxi-tracker-api/api/constants"
+	"taxi-tracker-api/api/dbconn"
+	"taxi-tracker-api/api/model"
 )
 
 type CustomerDao struct {

@@ -1,6 +1,6 @@
 package psql
 
-import "gbmchallenge/api/dbconn"
+import "taxi-tracker-api/api/dbconn"
 
 type TaxiServiceDao struct {
 }

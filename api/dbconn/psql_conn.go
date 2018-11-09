@@ -3,7 +3,7 @@ package dbconn
 import (
 	"database/sql"
 	"fmt"
-	"gbmchallenge/api/config"
+	"taxi-tracker-api/api/config"
 	_ "github.com/lib/pq"
 	"os"
 )

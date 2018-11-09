@@ -1,11 +1,11 @@
 package facadeimp
 
 import (
-	"gbmchallenge/api/daoi"
-	"gbmchallenge/api/errorhandler"
-	"gbmchallenge/api/facadei"
-	"gbmchallenge/api/model"
-	"gbmchallenge/api/response/prebuilt"
+	"taxi-tracker-api/api/daoi"
+	"taxi-tracker-api/api/errorhandler"
+	"taxi-tracker-api/api/facadei"
+	"taxi-tracker-api/api/model"
+	"taxi-tracker-api/api/response/prebuilt"
 )
 
 type vehicleDriverFacade struct {

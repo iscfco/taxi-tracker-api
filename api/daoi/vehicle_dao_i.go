@@ -1,7 +1,7 @@
 package daoi
 
 import (
-	"gbmchallenge/api/model"
+	"taxi-tracker-api/api/model"
 )
 
 type VehicleDaoI interface {

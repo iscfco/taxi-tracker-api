@@ -1,15 +1,15 @@
 package prebuilt
 
 import (
-	"gbmchallenge/api/constants"
-	"gbmchallenge/api/model"
+	"taxi-tracker-api/api/constants"
+	"taxi-tracker-api/api/model"
 )
 
 func GetSuccess() model.Result {
 	return model.Result{
 		ResCode:  constants.SUCCESS_C,
 		Msg:      constants.SUCCESS_M,
-		HttpCode: 500,
+		HttpCode: 200,
 	}
 }
 

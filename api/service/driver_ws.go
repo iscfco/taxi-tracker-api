@@ -2,10 +2,10 @@ package service
 
 import (
 	"encoding/json"
-	"gbmchallenge/api/daoimp/psql"
-	"gbmchallenge/api/facadei"
-	"gbmchallenge/api/facadeimp"
-	"gbmchallenge/api/model"
+	"taxi-tracker-api/api/daoimp/psql"
+	"taxi-tracker-api/api/facadei"
+	"taxi-tracker-api/api/facadeimp"
+	"taxi-tracker-api/api/model"
 	"net/http"
 )
 

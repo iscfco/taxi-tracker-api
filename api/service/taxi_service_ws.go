@@ -3,9 +3,9 @@ package service
 import (
 	"encoding/json"
 	"fmt"
-	"gbmchallenge/api/daoimp/psql"
-	"gbmchallenge/api/facadei"
-	"gbmchallenge/api/facadeimp"
+	"taxi-tracker-api/api/daoimp/psql"
+	"taxi-tracker-api/api/facadei"
+	"taxi-tracker-api/api/facadeimp"
 	"github.com/gorilla/context"
 	"net/http"
 )

@@ -1,6 +1,6 @@
 package facadei
 
-import "gbmchallenge/api/model"
+import "taxi-tracker-api/api/model"
 
 type TaxiServiceFacadeI interface {
 	CreateService(customerId *string) model.Result

@@ -2,9 +2,9 @@ package facadeimp
 
 import (
 	"fmt"
-	"gbmchallenge/api/daoi"
-	"gbmchallenge/api/facadei"
-	"gbmchallenge/api/model"
+	"taxi-tracker-api/api/daoi"
+	"taxi-tracker-api/api/facadei"
+	"taxi-tracker-api/api/model"
 )
 
 type vehicleFacadeImp struct {

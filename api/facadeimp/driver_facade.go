@@ -1,12 +1,12 @@
 package facadeimp
 
 import (
-	"gbmchallenge/api/constants"
-	"gbmchallenge/api/daoi"
-	"gbmchallenge/api/errorhandler"
-	"gbmchallenge/api/facadei"
-	"gbmchallenge/api/model"
-	"gbmchallenge/api/security"
+	"taxi-tracker-api/api/constants"
+	"taxi-tracker-api/api/daoi"
+	"taxi-tracker-api/api/errorhandler"
+	"taxi-tracker-api/api/facadei"
+	"taxi-tracker-api/api/model"
+	"taxi-tracker-api/api/security"
 	"github.com/satori/go.uuid"
 )
 

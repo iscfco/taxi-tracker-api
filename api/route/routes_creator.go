@@ -1,10 +1,10 @@
 package route
 
 import (
-	"gbmchallenge/api/middleware"
-	r "gbmchallenge/api/route/routes"
 	"github.com/codegangsta/negroni"
 	"github.com/gorilla/mux"
+	"taxi-tracker-api/api/middleware"
+	r "taxi-tracker-api/api/route/routes"
 )
 
 func CreateRoutes(router *mux.Router) {

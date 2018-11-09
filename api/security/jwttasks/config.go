@@ -1,7 +1,7 @@
 package jwttasks
 
 import (
-	"gbmchallenge/api/config"
+	"taxi-tracker-api/api/config"
 	"os"
 )
 
@@ -16,7 +16,7 @@ func getJwtPrivateKeyPath() string {
 	case config.Production:
 		return "api/security/jwttasks/keys/private_key"
 	case config.Local:
-		return os.Getenv("GOPATH") + "/src/gbmchallenge/api/security/jwttasks/keys/private_key"
+		return os.Getenv("GOPATH") + "/src/taxi-tracker-api/api/security/jwttasks/keys/private_key"
 	}
 	return ""
 }
@@ -26,7 +26,7 @@ func getJwtPublicKeyPath() string {
 	case config.Production:
 		return "api/security/jwttasks/keys/public_key.pub"
 	case config.Local:
-		return os.Getenv("GOPATH") + "/src/gbmchallenge/api/security/jwttasks/keys/public_key.pub"
+		return os.Getenv("GOPATH") + "/src/taxi-tracker-api/api/security/jwttasks/keys/public_key.pub"
 	}
 	return ""
 }

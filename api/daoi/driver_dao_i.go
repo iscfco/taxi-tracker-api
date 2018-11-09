@@ -1,6 +1,6 @@
 package daoi
 
-import "gbmchallenge/api/model"
+import "taxi-tracker-api/api/model"
 
 type DriverDaoI interface {
 	CreateAccount(c *model.Driver) (res model.Result, err error)
