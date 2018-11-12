@@ -2,12 +2,11 @@ package service
 
 import (
 	"encoding/json"
-	"fmt"
+	"github.com/gorilla/context"
+	"net/http"
 	"taxi-tracker-api/api/daoimp/psql"
 	"taxi-tracker-api/api/facadei"
 	"taxi-tracker-api/api/facadeimp"
-	"github.com/gorilla/context"
-	"net/http"
 )
 
 type taxiServiceWS struct {
@@ -26,7 +25,6 @@ func (ws *taxiServiceWS) CreateService(w http.ResponseWriter, r *http.Request){
 	customerId := context.Get(r, "userId").(string)
 	defer context.Clear(r)
 
-	fmt.Println("CustomerId extracted:", customerId)
 	res := ws.taxiServiceFacade.CreateService(&customerId)
 
 	payload, _ := json.Marshal(res)

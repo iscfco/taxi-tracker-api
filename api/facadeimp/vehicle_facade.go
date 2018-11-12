@@ -28,7 +28,6 @@ func NewVehicleFacade(v daoi.VehicleDaoI, vph daoi.VehiclePositionHistoryDaoI) f
 func (f *vehicleFacadeImp) GetVehicleList() []model.Vehicle {
 	v, err := f.vehicleDao.GetVehicleList()
 	if err != nil {
-		// handle
 		fmt.Println(err)
 	}
 	return v
@@ -37,7 +36,6 @@ func (f *vehicleFacadeImp) GetVehicleList() []model.Vehicle {
 func (f *vehicleFacadeImp) GetVehiclePosition(vehicleId *string) model.VehiclePosition {
 	v, err := f.vehicleDao.GetVehiclePosition(vehicleId)
 	if err != nil {
-		// handle
 		fmt.Println(err)
 	}
 	return v
@@ -46,7 +44,6 @@ func (f *vehicleFacadeImp) GetVehiclePosition(vehicleId *string) model.VehiclePo
 func (f *vehicleFacadeImp) UpdatePosition(vp *model.VehiclePosition) {
 	vehicleId, err := f.vehicleDao.UpdatePosition(vp)
 	if err != nil {
-		// handle
 		fmt.Println(err)
 	}
 	if vehicleId == "" {
@@ -55,7 +52,6 @@ func (f *vehicleFacadeImp) UpdatePosition(vp *model.VehiclePosition) {
 
 	vehicleId, err = f.vehiclePositionHistoryDao.SavePositionInHistorical(vp)
 	if err != nil {
-		// handle
 		fmt.Println(err)
 	}
 	if vehicleId == "" {
@@ -66,7 +62,6 @@ func (f *vehicleFacadeImp) UpdatePosition(vp *model.VehiclePosition) {
 func (f *vehicleFacadeImp) UpdatePositionV2(vp *model.VehiclePosition) {
 	vehicleId, err := f.vehicleDao.UpdatePosition(vp)
 	if err != nil {
-		// handle
 		fmt.Println(err)
 	}
 	if vehicleId == "" {
@@ -75,7 +70,6 @@ func (f *vehicleFacadeImp) UpdatePositionV2(vp *model.VehiclePosition) {
 
 	vehicleId, err = f.vehiclePositionHistoryDao.SavePositionInHistorical(vp)
 	if err != nil {
-		// handle
 		fmt.Println(err)
 	}
 	if vehicleId == "" {

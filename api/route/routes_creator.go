@@ -11,11 +11,12 @@ func CreateRoutes(router *mux.Router) {
 	var routes []r.Route
 	routes = append(routes, r.VehicleRoutes()...)
 	routes = append(routes, r.CustomerRoutes()...)
-	routes = append(routes, r.DriverRoutes()...)
 	routes = append(routes, r.CustomerSessionRoutes()...)
+	routes = append(routes, r.DriverRoutes()...)
 	routes = append(routes, r.DriverSessionRoutes()...)
-	routes = append(routes, r.TaxiServiceRoutes()...)
 	routes = append(routes, r.VehicleDriverRoutes()...)
+	routes = append(routes, r.TaxiServiceRoutes()...)
+
 
 	for _, route := range routes {
 		if route.Protected {

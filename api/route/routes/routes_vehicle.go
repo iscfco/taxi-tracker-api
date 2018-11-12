@@ -19,13 +19,13 @@ func VehicleRoutes() []Route {
 		},
 		{
 			Method:    "PATCH",
-			Path:      "/api/vehicle/{vehicleId}/position",
+			Path:      "/api/vehicle/position",
 			Handler:   ws.UpdateVehiclePositionHandler,
 			Protected: true,
 		},
 		{
 			Method:    "PATCH",
-			Path:      "/api/v2/vehicle/{vehicleId}/position",
+			Path:      "/api/v2/vehicle/position",
 			Handler:   ws.UpdateVehiclePositionHandlerV2,
 			Protected: true,
 		},
