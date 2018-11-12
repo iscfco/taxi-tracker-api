@@ -11,6 +11,12 @@ func TaxiServiceRoutes() []Route {
 			Handler: ws.CreateService,
 			Protected: true,
 		},
+		{
+			Method:  "GET",
+			Path:    "/api/taxi_service/",
+			Handler: ws.GetCustomerService,
+			Protected: true,
+		},
 	}
 
 	return routes

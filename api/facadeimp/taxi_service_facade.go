@@ -31,3 +31,12 @@ func (f *taxiServiceFacade) CreateService(customerId *string) (res model.Result)
 	}
 	return prebuilt.GetSuccess()
 }
+
+func (f *taxiServiceFacade) GetService(customerId *string) (taxiService model.TaxiService, err error) {
+	taxiService, err = f.daoTaxiService.GetCustomrService(customerId)
+	if err != nil {
+		return taxiService, err
+	}
+
+	return taxiService, err
+}

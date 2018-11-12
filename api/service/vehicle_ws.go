@@ -54,3 +54,17 @@ func (ws *vehicleWS) UpdateVehiclePositionHandler(w http.ResponseWriter, r *http
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("ok"))
 }
+
+func (ws *vehicleWS) UpdateVehiclePositionHandlerV2(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/plain")
+	var vehiclePosition model.VehiclePosition
+	err := json.NewDecoder(r.Body).Decode(&vehiclePosition)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("Error decoding body"))
+		return
+	}
+	ws.vehicleFacade.UpdatePositionV2(&vehiclePosition)
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("ok"))
+}

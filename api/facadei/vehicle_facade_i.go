@@ -8,4 +8,5 @@ type VehicleFacadeI interface {
 	GetVehicleList() []model.Vehicle
 	GetVehiclePosition(vehicleId *string) model.VehiclePosition
 	UpdatePosition(vp *model.VehiclePosition)
+	UpdatePositionV2(vp *model.VehiclePosition)
 }

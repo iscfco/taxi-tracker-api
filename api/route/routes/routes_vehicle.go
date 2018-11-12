@@ -6,9 +6,10 @@ func VehicleRoutes() []Route {
 	ws := service.NewVehicleWS()
 	routes := []Route{
 		{
-			Method:  "GET",
-			Path:    "/api/vehicle",
-			Handler: ws.GetVehiclesHandler,
+			Method:    "GET",
+			Path:      "/api/vehicle",
+			Handler:   ws.GetVehiclesHandler,
+			Protected: true,
 		},
 		{
 			Method:    "GET",
@@ -20,6 +21,12 @@ func VehicleRoutes() []Route {
 			Method:    "PATCH",
 			Path:      "/api/vehicle/{vehicleId}/position",
 			Handler:   ws.UpdateVehiclePositionHandler,
+			Protected: true,
+		},
+		{
+			Method:    "PATCH",
+			Path:      "/api/v2/vehicle/{vehicleId}/position",
+			Handler:   ws.UpdateVehiclePositionHandlerV2,
 			Protected: true,
 		},
 	}
