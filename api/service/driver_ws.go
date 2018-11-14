@@ -2,11 +2,11 @@ package service
 
 import (
 	"encoding/json"
+	"net/http"
 	"taxi-tracker-api/api/daoimp/psql"
 	"taxi-tracker-api/api/facadei"
 	"taxi-tracker-api/api/facadeimp"
-	"taxi-tracker-api/api/model"
-	"net/http"
+	"taxi-tracker-api/api/model/driver"
 )
 
 type driverWS struct {
@@ -22,7 +22,7 @@ func NewDriverWS() driverWS {
 
 func (ws *driverWS) CreateAccountHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	driver := model.Driver{}
+	driver := driver.Driver{}
 	err := json.NewDecoder(r.Body).Decode(&driver)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)

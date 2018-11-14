@@ -2,12 +2,12 @@ package service
 
 import (
 	"encoding/json"
+	"github.com/gorilla/mux"
+	"net/http"
 	"taxi-tracker-api/api/daoimp/psql"
 	"taxi-tracker-api/api/facadei"
 	"taxi-tracker-api/api/facadeimp"
-	"taxi-tracker-api/api/model"
-	"github.com/gorilla/mux"
-	"net/http"
+	"taxi-tracker-api/api/model/vehicle"
 )
 
 type vehicleWS struct {
@@ -43,7 +43,7 @@ func (ws *vehicleWS) GetVehiclePositionHandler(w http.ResponseWriter, r *http.Re
 
 func (ws *vehicleWS) UpdateVehiclePositionHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/plain")
-	var vehiclePosition model.VehiclePosition
+	var vehiclePosition vehicle.VehiclePosition
 	err := json.NewDecoder(r.Body).Decode(&vehiclePosition)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
@@ -57,7 +57,7 @@ func (ws *vehicleWS) UpdateVehiclePositionHandler(w http.ResponseWriter, r *http
 
 func (ws *vehicleWS) UpdateVehiclePositionHandlerV2(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/plain")
-	var vehiclePosition model.VehiclePosition
+	var vehiclePosition vehicle.VehiclePosition
 	err := json.NewDecoder(r.Body).Decode(&vehiclePosition)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)

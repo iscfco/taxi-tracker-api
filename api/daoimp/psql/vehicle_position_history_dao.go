@@ -2,7 +2,7 @@ package psql
 
 import (
 	"taxi-tracker-api/api/dbconn"
-	"taxi-tracker-api/api/model"
+	"taxi-tracker-api/api/model/vehicle"
 )
 
 type VehiclePositionHistoryDao struct {
@@ -15,7 +15,7 @@ var qSavePositionInHistorical = `
 		($1, 			$2,			$3			)
 	RETURNING vehicle_id`
 
-func (VehiclePositionHistoryDao) SavePositionInHistorical(vp *model.VehiclePosition) (string, error) {
+func (VehiclePositionHistoryDao) SavePositionInHistorical(vp *vehicle.VehiclePosition) (string, error) {
 	db, err := dbconn.GetPsqlDBConn()
 	if err != nil {
 		return "", err

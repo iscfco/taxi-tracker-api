@@ -1,4 +1,4 @@
-package PubSubTask
+package pubsubtask
 
 type Task struct {
 	TaskType string      `json:"task_type"`

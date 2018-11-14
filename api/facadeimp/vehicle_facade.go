@@ -8,9 +8,9 @@ import (
 	"taxi-tracker-api/api/daoi"
 	"taxi-tracker-api/api/facadei"
 	"taxi-tracker-api/api/helper"
-	"taxi-tracker-api/api/model"
-	"taxi-tracker-api/api/model/PubSubTask"
-	"taxi-tracker-api/api/model/PubSubTask/payload"
+	"taxi-tracker-api/api/model/pubsubtask"
+	"taxi-tracker-api/api/model/pubsubtask/payload"
+	"taxi-tracker-api/api/model/vehicle"
 )
 
 type vehicleFacadeImp struct {
@@ -25,7 +25,7 @@ func NewVehicleFacade(v daoi.VehicleDaoI, vph daoi.VehiclePositionHistoryDaoI) f
 	}
 }
 
-func (f *vehicleFacadeImp) GetVehicleList() []model.Vehicle {
+func (f *vehicleFacadeImp) GetVehicleList() []vehicle.Vehicle {
 	v, err := f.vehicleDao.GetVehicleList()
 	if err != nil {
 		fmt.Println(err)
@@ -33,7 +33,7 @@ func (f *vehicleFacadeImp) GetVehicleList() []model.Vehicle {
 	return v
 }
 
-func (f *vehicleFacadeImp) GetVehiclePosition(vehicleId *string) model.VehiclePosition {
+func (f *vehicleFacadeImp) GetVehiclePosition(vehicleId *string) vehicle.VehiclePosition {
 	v, err := f.vehicleDao.GetVehiclePosition(vehicleId)
 	if err != nil {
 		fmt.Println(err)
@@ -41,7 +41,7 @@ func (f *vehicleFacadeImp) GetVehiclePosition(vehicleId *string) model.VehiclePo
 	return v
 }
 
-func (f *vehicleFacadeImp) UpdatePosition(vp *model.VehiclePosition) {
+func (f *vehicleFacadeImp) UpdatePosition(vp *vehicle.VehiclePosition) {
 	vehicleId, err := f.vehicleDao.UpdatePosition(vp)
 	if err != nil {
 		fmt.Println(err)
@@ -59,7 +59,7 @@ func (f *vehicleFacadeImp) UpdatePosition(vp *model.VehiclePosition) {
 	}
 }
 
-func (f *vehicleFacadeImp) UpdatePositionV2(vp *model.VehiclePosition) {
+func (f *vehicleFacadeImp) UpdatePositionV2(vp *vehicle.VehiclePosition) {
 	vehicleId, err := f.vehicleDao.UpdatePosition(vp)
 	if err != nil {
 		fmt.Println(err)
@@ -76,7 +76,7 @@ func (f *vehicleFacadeImp) UpdatePositionV2(vp *model.VehiclePosition) {
 		return
 	}
 
-	task := PubSubTask.Task{
+	task := pubsubtask.Task{
 		TaskType: constants.Publish,
 		Payload: payload.Publish{
 			Topic: vp.VehicleId,

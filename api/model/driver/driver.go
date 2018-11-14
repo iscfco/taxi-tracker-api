@@ -1,4 +1,4 @@
-package model
+package driver
 
 type Driver struct {
 	Id        string `json:"id"`

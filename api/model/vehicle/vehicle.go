@@ -1,4 +1,4 @@
-package model
+package vehicle
 
 type Vehicle struct {
 	Id        string  `json:"id"`

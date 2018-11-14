@@ -28,7 +28,7 @@ func (ws *taxiServiceWS) CreateService(w http.ResponseWriter, r *http.Request){
 	res := ws.taxiServiceFacade.CreateService(&customerId)
 
 	payload, _ := json.Marshal(res)
-	w.WriteHeader(res.HttpCode)
+	w.WriteHeader(res.Result.HttpCode)
 	w.Write(payload)
 }
 

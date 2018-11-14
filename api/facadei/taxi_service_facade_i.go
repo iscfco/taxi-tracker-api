@@ -1,8 +1,10 @@
 package facadei
 
-import "taxi-tracker-api/api/model"
+import (
+	"taxi-tracker-api/api/model/taxi_service"
+)
 
 type TaxiServiceFacadeI interface {
-	CreateService(customerId *string) model.Result
-	GetService(customerId *string) (taxiService model.TaxiService, err error)
+	CreateService(customerId *string) taxi_service.CreateServiceResp
+	GetService(customerId *string) (taxiService taxi_service.TaxiService, err error)
 }

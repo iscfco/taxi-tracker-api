@@ -1,7 +1,9 @@
-package model
+package driver
+
+import "taxi-tracker-api/api/model"
 
 type DriverSession struct {
-	Res          Result `json:"result"`
+	Res          model.Result `json:"result"`
 	FirstName    string `json:"first_name,omitempty"`
 	LastName     string `json:"last_name,omitempty"`
 	AccessToken  string `json:"access_token,omitempty"`

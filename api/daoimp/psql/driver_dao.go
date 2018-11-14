@@ -4,6 +4,7 @@ import (
 	"taxi-tracker-api/api/constants"
 	"taxi-tracker-api/api/dbconn"
 	"taxi-tracker-api/api/model"
+	"taxi-tracker-api/api/model/driver"
 )
 
 type DriverDao struct {
@@ -11,7 +12,7 @@ type DriverDao struct {
 
 var qDriverInsert = `SELECT * FROM driver_insert($1, $2, $3, $4, $5)`
 
-func (DriverDao) CreateAccount(d *model.Driver) (res model.Result, err error) {
+func (DriverDao) CreateAccount(d *driver.Driver) (res model.Result, err error) {
 	db, err := dbconn.GetPsqlDBConn()
 	if err != nil {
 		return res, err
@@ -39,7 +40,7 @@ var qDriverGetByEmail = `
 	FROM driver C 
 	WHERE email = $1`
 
-func (DriverDao) GetByEmail(email *string) (err error, c model.Driver) {
+func (DriverDao) GetByEmail(email *string) (err error, c driver.Driver) {
 	db, err := dbconn.GetPsqlDBConn()
 	if err != nil {
 		return err, c

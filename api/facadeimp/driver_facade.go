@@ -6,6 +6,7 @@ import (
 	"taxi-tracker-api/api/errorhandler"
 	"taxi-tracker-api/api/facadei"
 	"taxi-tracker-api/api/model"
+	"taxi-tracker-api/api/model/driver"
 	"taxi-tracker-api/api/security"
 	"github.com/satori/go.uuid"
 )
@@ -20,7 +21,7 @@ func NewDriverFacade(d daoi.DriverDaoI) facadei.DriverFacadeI {
 	}
 }
 
-func (c *driverFacade) CreateAccount(driver *model.Driver) model.Result {
+func (c *driverFacade) CreateAccount(driver *driver.Driver) model.Result {
 	if len(driver.Password) < 8 {
 		return model.Result{
 			ResCode:  constants.EDV001_C,

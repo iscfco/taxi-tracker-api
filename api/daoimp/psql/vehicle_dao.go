@@ -2,7 +2,7 @@ package psql
 
 import (
 	"taxi-tracker-api/api/dbconn"
-	"taxi-tracker-api/api/model"
+	"taxi-tracker-api/api/model/vehicle"
 )
 
 type VehicleDao struct {
@@ -12,7 +12,7 @@ var qGetVehicleList = `
 	SELECT * 
 	FROM vehicle`
 
-func (VehicleDao) GetVehicleList() (vehicles []model.Vehicle, err error) {
+func (VehicleDao) GetVehicleList() (vehicles []vehicle.Vehicle, err error) {
 	db, err := dbconn.GetPsqlDBConn()
 	if err != nil {
 		return vehicles, err
@@ -31,7 +31,7 @@ func (VehicleDao) GetVehicleList() (vehicles []model.Vehicle, err error) {
 	}
 	defer rows.Close()
 
-	var v model.Vehicle
+	var v vehicle.Vehicle
 	for rows.Next() {
 		err = rows.Scan(&v.Id, &v.Make, &v.Model, &v.Year, &v.Latitude, &v.Longitude)
 		if err != nil {
@@ -47,7 +47,7 @@ var qGetVehiclePosition = `
 	FROM vehicle
 	WHERE id = $1`
 
-func (VehicleDao) GetVehiclePosition(vehicleId *string) (vp model.VehiclePosition, err error) {
+func (VehicleDao) GetVehiclePosition(vehicleId *string) (vp vehicle.VehiclePosition, err error) {
 	db, err := dbconn.GetPsqlDBConn()
 	if err != nil {
 		return vp, err
@@ -84,7 +84,7 @@ var qUpdatePosition = `
 	WHERE id = $3
 	RETURNING id`
 
-func (VehicleDao) UpdatePosition(vp *model.VehiclePosition) (string, error) {
+func (VehicleDao) UpdatePosition(vp *vehicle.VehiclePosition) (string, error) {
 	db, err := dbconn.GetPsqlDBConn()
 	if err != nil {
 		return "", err

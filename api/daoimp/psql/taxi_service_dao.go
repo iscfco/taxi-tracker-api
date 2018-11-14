@@ -2,7 +2,7 @@ package psql
 
 import (
 	"taxi-tracker-api/api/dbconn"
-	"taxi-tracker-api/api/model"
+	"taxi-tracker-api/api/model/taxi_service"
 )
 
 type TaxiServiceDao struct {
@@ -45,8 +45,8 @@ var qGetCustomerService = `
 	FROM taxi_service
 	WHERE customer_id = $1`
 
-func (TaxiServiceDao) GetCustomrService(customerId *string) (model.TaxiService, error) {
-	var taxiService model.TaxiService
+func (TaxiServiceDao) GetCustomrService(customerId *string) (taxi_service.TaxiService, error) {
+	var taxiService taxi_service.TaxiService
 	db, err := dbconn.GetPsqlDBConn()
 	if err != nil {
 		return taxiService, err

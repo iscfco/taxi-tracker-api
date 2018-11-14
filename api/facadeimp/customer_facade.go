@@ -6,6 +6,7 @@ import (
 	"taxi-tracker-api/api/errorhandler"
 	"taxi-tracker-api/api/facadei"
 	"taxi-tracker-api/api/model"
+	"taxi-tracker-api/api/model/customer"
 	"taxi-tracker-api/api/security"
 	"github.com/satori/go.uuid"
 )
@@ -20,7 +21,7 @@ func NewCustomerFacade(c daoi.CustomerDaoI) facadei.CustomerFacadeI {
 	}
 }
 
-func (c *customerFacade) CreateAccount(customer *model.Customer) model.Result {
+func (c *customerFacade) CreateAccount(customer *customer.Customer) model.Result {
 	if len(customer.Password) < 8 {
 		return model.Result{
 			ResCode:  constants.EDV001_C,

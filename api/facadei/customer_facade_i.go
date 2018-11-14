@@ -1,7 +1,10 @@
 package facadei
 
-import "taxi-tracker-api/api/model"
+import (
+	"taxi-tracker-api/api/model"
+	"taxi-tracker-api/api/model/customer"
+)
 
 type CustomerFacadeI interface {
-	CreateAccount(customer *model.Customer) model.Result
+	CreateAccount(customer *customer.Customer) model.Result
 }

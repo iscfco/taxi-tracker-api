@@ -6,6 +6,7 @@ import (
 	"taxi-tracker-api/api/errorhandler"
 	"taxi-tracker-api/api/facadei"
 	"taxi-tracker-api/api/model"
+	"taxi-tracker-api/api/model/driver"
 	"taxi-tracker-api/api/response/prebuilt"
 	"taxi-tracker-api/api/security"
 	"taxi-tracker-api/api/security/jwttasks"
@@ -21,7 +22,7 @@ func NewDriverSessionFacade(dao daoi.DriverDaoI) facadei.DriverSessionFacadeI {
 	}
 }
 
-func (c *driverSessionFacade) Authorize(user *model.User) (s model.DriverSession) {
+func (c *driverSessionFacade) Authorize(user *model.User) (s driver.DriverSession) {
 	err, driver := c.driverDao.GetByEmail(&user.User)
 	if err != nil {
 		s.Res = errorhandler.HandleErr(&err)

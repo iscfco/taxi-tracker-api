@@ -1,4 +1,4 @@
-package model
+package vehicle
 
 type VehiclePosition struct {
 	VehicleId string `json:"vehicle_id"`

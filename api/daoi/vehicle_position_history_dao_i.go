@@ -1,7 +1,9 @@
 package daoi
 
-import "taxi-tracker-api/api/model"
+import (
+	"taxi-tracker-api/api/model/vehicle"
+)
 
 type VehiclePositionHistoryDaoI interface {
-	SavePositionInHistorical(vp *model.VehiclePosition) (string, error)
+	SavePositionInHistorical(vp *vehicle.VehiclePosition) (string, error)
 }
