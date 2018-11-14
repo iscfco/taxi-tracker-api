@@ -2,41 +2,43 @@ package psql
 
 import (
 	"taxi-tracker-api/api/dbconn"
+	"taxi-tracker-api/api/model"
 	"taxi-tracker-api/api/model/taxi_service"
 )
 
 type TaxiServiceDao struct {
 }
 
-var qCreateService = `SELECT taxi_service_insert($1)`
+var qCreateService = `SELECT taxi_service_insert($1, $2, $3)`
 
-func (TaxiServiceDao) CreateService(customerId *string) (string, error) {
-	var vehicleId string
+func (TaxiServiceDao) CreateService(customerId *string, usrPosition *model.UserPosition) (int, string, string, error) {
+	var vehicleId, userName string
+	var resCode int
 	db, err := dbconn.GetPsqlDBConn()
 	if err != nil {
-		return vehicleId, err
+		return resCode, vehicleId, userName, err
 	}
 	defer db.Close()
 
 	stmt, err := db.Prepare(qCreateService)
 	if err != nil {
-		return vehicleId, err
+		return resCode, vehicleId, userName, err
 	}
 	defer stmt.Close()
 
 	rows, err := stmt.Query(customerId)
 	if err != nil {
-		return vehicleId, err
+		return resCode, vehicleId, userName, err
 	}
 
 	for rows.Next() {
-		err = rows.Scan(&vehicleId)
+		err = rows.Scan(&resCode, &vehicleId, &userName)
 		if err != nil {
-			return vehicleId, err
+			return resCode, vehicleId, userName, err
 		}
 	}
 
-	return vehicleId, err
+	return resCode, vehicleId, userName, err
 }
 
 

@@ -9,7 +9,7 @@ import (
 	"taxi-tracker-api/api/facadei"
 	"taxi-tracker-api/api/helper"
 	"taxi-tracker-api/api/model/pubsubtask"
-	"taxi-tracker-api/api/model/pubsubtask/payload"
+	"taxi-tracker-api/api/model/pubsubtask/brokertasks/payload"
 	"taxi-tracker-api/api/model/vehicle"
 )
 

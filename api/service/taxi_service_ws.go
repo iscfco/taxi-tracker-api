@@ -5,8 +5,10 @@ import (
 	"github.com/gorilla/context"
 	"net/http"
 	"taxi-tracker-api/api/daoimp/psql"
+	"taxi-tracker-api/api/errorhandler"
 	"taxi-tracker-api/api/facadei"
 	"taxi-tracker-api/api/facadeimp"
+	"taxi-tracker-api/api/model"
 )
 
 type taxiServiceWS struct {
@@ -25,7 +27,16 @@ func (ws *taxiServiceWS) CreateService(w http.ResponseWriter, r *http.Request){
 	customerId := context.Get(r, "userId").(string)
 	defer context.Clear(r)
 
-	res := ws.taxiServiceFacade.CreateService(&customerId)
+	binding := model.UserPosition{}
+	err := json.NewDecoder(r.Body).Decode(&binding)
+	if err != nil {
+		resp := errorhandler.HandleErr(&err)
+		w.WriteHeader(resp.HttpCode)
+		payload, _ := json.Marshal(resp)
+		w.Write(payload)
+	}
+
+	res := ws.taxiServiceFacade.CreateService(&customerId, &binding)
 
 	payload, _ := json.Marshal(res)
 	w.WriteHeader(res.Result.HttpCode)

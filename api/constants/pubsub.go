@@ -9,4 +9,7 @@ const (
 )
 
 // MessageToTheClient Subjects:
-const VehiclePositionUpdate = "vehicle_position_update"
+const (
+	VehiclePositionUpdate = "vehicle_position_update"
+	TaxiServiceRequest    = "taxi_service_request"
+)
